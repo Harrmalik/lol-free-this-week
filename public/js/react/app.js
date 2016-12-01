@@ -101,23 +101,14 @@
 	    },
 	    render: function render() {
 	        var component = this;
+	        var currentChamp = this.state.selectedChamp;
 	        console.log(this.state);
 	        return _react2.default.createElement(
 	            'div',
-	            { className: 'ui grid container' },
-	            _react2.default.createElement(
-	                'h2',
-	                { className: 'ui header' },
-	                'League of Legends',
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'sub header' },
-	                    'Free rotation this week'
-	                )
-	            ),
+	            { className: 'ui grid' },
 	            _react2.default.createElement(
 	                'div',
-	                { className: 'ui tiny images' },
+	                { className: 'images' },
 	                component.state.champs ? _lodash2.default.map(component.state.champs, function (champ) {
 	                    return _react2.default.createElement(_Champion2.default, {
 	                        key: champ.id,
@@ -128,9 +119,37 @@
 	                    null,
 	                    'no'
 	                ),
-	                component.state.selectedChamp ? _react2.default.createElement(_reactSound2.default, {
-	                    url: component.state.selectedChamp.sound,
-	                    playStatus: _reactSound2.default.status.PLAYING }) : null
+	                currentChamp ? _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(_reactSound2.default, {
+	                        url: currentChamp.sound,
+	                        playStatus: _reactSound2.default.status.PLAYING }),
+	                    _react2.default.createElement(
+	                        'footer',
+	                        null,
+	                        _react2.default.createElement(
+	                            'h2',
+	                            { className: 'ui header inverted left aligned' },
+	                            currentChamp.name,
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'ui sub header' },
+	                                currentChamp.title
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'h3',
+	                            { className: 'ui header inverted right aligned' },
+	                            'League of Legends',
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'sub header' },
+	                                'Free rotation this week'
+	                            )
+	                        )
+	                    )
+	                ) : null
 	            )
 	        );
 	    }
@@ -38664,7 +38683,7 @@
 	        this.props.parent.selectedChamp(this.props.champ.id);
 	    },
 	    render: function render() {
-	        return _react2.default.createElement('img', { className: 'ui medium image', onClick: this.selectChamp, src: this.props.champ.avatar });
+	        return _react2.default.createElement('img', { className: 'ui tiny image circular', onClick: this.selectChamp, src: this.props.champ.avatar });
 	    }
 	});
 

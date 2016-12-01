@@ -18,7 +18,7 @@ var Champion = React.createClass({
     },
     render() {
         return (
-            <img className="ui medium image" onClick={this.selectChamp} src={this.props.champ.avatar}></img>
+            <img className="ui tiny image circular" onClick={this.selectChamp} src={this.props.champ.avatar}></img>
         )
     }
 })

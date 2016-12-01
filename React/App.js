@@ -34,14 +34,11 @@ var Champs = React.createClass({
     },
     render() {
         var component = this
+        var currentChamp = this.state.selectedChamp
         console.log(this.state)
         return (
-            <div className="ui grid container">
-                <h2 className="ui header">
-                  League of Legends
-                  <div className="sub header">Free rotation this week</div>
-                </h2>
-                <div className="ui tiny images">
+            <div className="ui grid">
+                <div className="images">
                 {component.state.champs ?
                     _.map(component.state.champs, function(champ) {
                         return (
@@ -53,10 +50,24 @@ var Champs = React.createClass({
                     })
                 : <div>no</div>
                 }
-                {component.state.selectedChamp ?
-                    <Sound
-                        url={component.state.selectedChamp.sound}
-                        playStatus={Sound.status.PLAYING} /> : null
+                {currentChamp ?
+                    <div>
+                        <Sound
+                            url={currentChamp.sound}
+                            playStatus={Sound.status.PLAYING} />
+
+                        <footer>
+                            <h2 className="ui header inverted left aligned">
+                                {currentChamp.name}
+                                <div className="ui sub header">{currentChamp.title}</div>
+                            </h2>
+
+                            <h3 className="ui header inverted right aligned">
+                                  League of Legends
+                                  <div className="sub header">Free rotation this week</div>
+                            </h3>
+                        </footer>
+                    </div>  : null
                 }
                 </div>
             </div>
