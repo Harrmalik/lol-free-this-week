@@ -1,0 +1,12 @@
+body {
+    background-image: url("../imgs/clear.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    padding: 50px;
+    text-align: center;
+}
+
+a {
+  color: #00B7FF;
+}
