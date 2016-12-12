@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router();
 let _ = require('lodash');
 let request = require('request');
-let key = process.env.api-key;
+let key = process.env.apiKey;
 
 let champs = [];
 
