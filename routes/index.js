@@ -8,8 +8,6 @@ let champs = [];
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    console.log('yooooo');
-    console.log(key);
     request({
         url: `https://na1.api.riotgames.com/lol/platform/v3/champion-rotations`,
         headers: {
@@ -17,9 +15,7 @@ router.get('/', function(req, res, next) {
         }
     }, function (error, response, body) {
         let data = JSON.parse(body);
-        console.log(body);
         champs = data.freeChampionIds;
-        console.log(champs);
         res.render('index', {
             'title': 'Free this week'
         });
@@ -30,8 +26,6 @@ router.get('/champs', function(req, res, next) {
     request(`http://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json`, function (error, response, body) {
         let data = JSON.parse(body);
         champions = _.map(data.data, function(champ) {
-
-            console.log(champ.key);
             if (_.indexOf(champs, parseInt(champ.key)) > 0) {
                 return {
                     id: champ.id,
