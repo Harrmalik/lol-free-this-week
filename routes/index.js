@@ -8,11 +8,18 @@ let champs = [];
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    request(`https://na.api.pvp.net/api/lol/na/v1.2/champion?freeToPlay=true&api_key=${key}`, function (error, response, body) {
+    console.log('yooooo');
+    console.log(key);
+    request({
+        url: `https://na1.api.riotgames.com/lol/platform/v3/champion-rotations`,
+        headers: {
+          "X-Riot-Token": key
+        }
+    }, function (error, response, body) {
         let data = JSON.parse(body);
-        champs = _.map(data.champions, function(champ) {
-            return champ.id;
-        })
+        console.log(body);
+        champs = data.freeChampionIds;
+        console.log(champs);
         res.render('index', {
             'title': 'Free this week'
         });
@@ -20,19 +27,20 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/champs', function(req, res, next) {
-    request(`https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=tags&api_key=${key}`, function (error, response, body) {
+    request(`http://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json`, function (error, response, body) {
         let data = JSON.parse(body);
-
         champions = _.map(data.data, function(champ) {
-            if (_.indexOf(champs, champ.id) > 0) {
+
+            console.log(champ.key);
+            if (_.indexOf(champs, parseInt(champ.key)) > 0) {
                 return {
                     id: champ.id,
                     name: champ.name,
                     title: champ.title,
                     tags: champ.tags,
-                    image: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.key}_0.jpg`,
-                    avatar: `http://ddragon.leagueoflegends.com/cdn/6.23.1/img/champion/${champ.key}.png`,
-                    sound: `/sounds/${champ.key}.mp3`
+                    image: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`,
+                    avatar: `http://ddragon.leagueoflegends.com/cdn/10.4.1/img/champion/${champ.id}.png`,
+                    sound: `/sounds/${champ.id}.mp3`
                 }
             } else {
                 return '';
