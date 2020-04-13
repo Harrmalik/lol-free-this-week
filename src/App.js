@@ -38,7 +38,7 @@ function App() {
   const [filteredChampions, setFilteredChampions] = useState([]);
   const [championsByTags, setChampionsByTags] = useState({});
   function getChampions(freeChamps) {
-    fetch('http://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json')
+    fetch('https://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json')
       .then((response) => {
         return response.json();
       })
