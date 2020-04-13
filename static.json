@@ -5,7 +5,7 @@
   },
   "proxies": {
     "/api/": {
-      "origin": "https://f59ta1758l.execute-api.us-east-1.amazonaws.com"
+      "origin": "https://f59ta1758l.execute-api.us-east-1.amazonaws.com/api"
     }
   }
 }
