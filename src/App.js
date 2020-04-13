@@ -3,33 +3,16 @@ import _ from 'lodash';
 import Sound from 'react-sound'
 
 function App() {
-  const [freeChamps, setFreeChampions] = useState([
-        7,
-        26,
-        32,
-        35,
-        36,
-        48,
-        62,
-        67,
-        79,
-        84,
-        91,
-        110,
-        122,
-        143,
-        240
-    ]);
+  const [freeChamps, setFreeChampions] = useState([]);
   useEffect(() => {
     if (!freeChamps || champions.length === 0) {
-      getChampions(freeChamps);
-      fetch('/dev/league/getChampionRotations')
+      fetch('/api/league/getChampionRotations')
       .then((response) => {
         return response.json();
       })
       .then((response) => {
-        // setFreeChampions(response.champs)
-        // getChampions(response.champs);
+        setFreeChampions(response.champs)
+        getChampions(response.champs);
       });
     }
   })
